@@ -18,5 +18,5 @@ jboss/server/minimal/work/**/*
 
 *.DEPLOYED
 
-/build/
+*/build/*
 
