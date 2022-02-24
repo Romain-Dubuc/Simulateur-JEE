@@ -2,18 +2,17 @@ package model;
 
 import java.util.List;
 
-import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
-
+import javax.ejb.Stateless;
 import model.entity.MetricItem;
 
 @Named
-@ApplicationScoped
 @Transactional
-public class DataService {
+@Stateless
+public class DataService implements DataServiceLocal {
 
 	@PersistenceContext
 	private EntityManager em;
@@ -27,4 +26,5 @@ public class DataService {
 	}
 
 }
+
 
