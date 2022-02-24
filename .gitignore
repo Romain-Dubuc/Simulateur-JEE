@@ -20,3 +20,4 @@ jboss/server/minimal/work/**/*
 
 */build/
 
+*.DS_Store
