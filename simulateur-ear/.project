@@ -3,6 +3,7 @@
 	<name>simulateur-ear</name>
 	<comment></comment>
 	<projects>
+		<project>simulateur-jax-rs</project>
 		<project>simulateur-ejb</project>
 		<project>simulateur-jsf</project>
 	</projects>
