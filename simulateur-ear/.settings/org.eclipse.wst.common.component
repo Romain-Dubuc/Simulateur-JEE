@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="simulateur-ear">
+        <wb-resource deploy-path="/" source-path="/EarContent" tag="defaultRootSource"/>
+        <dependent-module archiveName="simulateur-jax-rs.war" deploy-path="/" handle="module:/resource/simulateur-jax-rs/simulateur-jax-rs">
+            <dependent-object/>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="simulateur-ejb.jar" deploy-path="/" handle="module:/resource/simulateur-ejb/simulateur-ejb">
+            <dependent-object/>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="simulateur-jsf.war" deploy-path="/" handle="module:/resource/simulateur-jsf/simulateur-jsf">
+            <dependent-object/>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+    </wb-module>
+</project-modules>
