@@ -1,13 +1,16 @@
 package model.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
- * Item d'une métrique.
+ * Item d'une métrique d'une simulation.
  */
 @Entity
 @Table(name = "metric_item")
@@ -16,90 +19,111 @@ public class MetricItem {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
+	@JoinColumn(name = "simulation", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+	private Simulation simulation;
 
 	/**
 	 * Temps récupération de la fusée
 	 */
+	@Column(nullable = false)
 	private Double time;
 	
 	/**
 	 * Vélocité de la fusée
 	 */
+	@Column(nullable = false)
 	private Double velocity;
 	
 	/**
 	 * Altitude de la fusée
 	 */
+	@Column(nullable = false)
 	private Double altitude;
 
 	/**
 	 * Vélocité sur l'axe x de la fusée
 	 */
+	@Column(nullable = false)
 	private Double velocity_x;
 	
 	/**
 	 * Vélocité sur l'axe y de la fusée
 	 */
+	@Column(nullable = false)
 	private Double velocity_y;
 	
 	/**
 	 * L'accélération de la fusée
 	 */
+	@Column(nullable = false)
 	private Double acceleration;
 	
 	/**
 	 * Distance vers la cible
 	 */
+	@Column(nullable = false)
 	private Double downrange_distance;
 	
 	/**
 	 * Angle de la fusée
 	 */
+	@Column(nullable = false)
 	private Double angle;
 	
 	/**
 	 * Poussée de la fusée
 	 */
+	@Column(nullable = false)
 	private Double thrust;
 	
 	/**
 	 * Accélérateur de la fusée
 	 */
+	@Column(nullable = false)
 	private Double throttle;
 	
 	/**
 	 * Masse de la fusée
 	 */
+	@Column(nullable = false)
 	private Double s1_mass;
 	
 	/**
 	 * CD de la fusée
 	 */
+	@Column(nullable = false)
 	private Double cd;
 	
 	/**
 	 * Trainée de la fusée
 	 */
+	@Column(nullable = false)
 	private Double drag;
 	
 	/**
 	 * Gravité de la fusée
 	 */
+	@Column(nullable = false)
 	private Double gravity;
 	
 	/**
 	 * Différence entre la vélocité et la trainée de la fusée
 	 */
+	@Column(nullable = false)
 	private Double delta_v_drag;
 	
 	/**
 	 * Perte de gravité de la fusée
 	 */
+	@Column(nullable = false)
 	private Double gravity_loss;
 
 	/**
 	 * Delta de la vélocité
 	 */
+	@Column(nullable = false)
 	private Double delta_v;
 	
 	protected MetricItem() {
@@ -112,6 +136,14 @@ public class MetricItem {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	
+	public Simulation getSimulation() {
+		return simulation;
+	}
+
+	public void setSimulation(Simulation simulation) {
+		this.simulation = simulation;
 	}
 
 	public Double getTime() {
