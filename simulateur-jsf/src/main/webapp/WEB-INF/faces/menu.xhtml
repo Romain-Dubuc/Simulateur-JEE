@@ -9,9 +9,10 @@
 				<h:form class='form-simulation'>
 					<h:inputText 
 						onkeypress="if(event.which &lt; 48 || event.which &gt; 57) return false;"
+						value="#{simulationController.refreshRate}"
 						a:placeholder="#{text['face.menu.refreshrate']}"
 					/>
-					<h:selectOneMenu id="speed">
+					<h:selectOneMenu id="speed" value="#{simulationController.speed}">
 						<f:selectItem itemValue="0.5" itemLabel="x0.5" />
 						<f:selectItem itemValue="1.0" itemLabel="x1.0" />
 						<f:selectItem itemValue="2" itemLabel="x2" />
@@ -19,7 +20,7 @@
 						<f:selectItem itemValue="8" itemLabel="x8" />
 						<f:selectItem itemValue="16" itemLabel="x16" />
 					</h:selectOneMenu>
-					<h:commandButton class='button' value="#{text['face.menu.simulation']}" action="#{catalogController.addNewItem()}" />
+					<h:commandButton class='button' value="#{text['face.menu.simulation']}" action="#{simulationController.startSimulation()}" />
 				</h:form>
 			</div>
 			<div id='end-navbar'>
