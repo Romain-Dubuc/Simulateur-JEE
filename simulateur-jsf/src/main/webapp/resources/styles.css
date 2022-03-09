@@ -1,0 +1,73 @@
+body {
+	margin: 0;
+	padding: 0;
+	font-family: system-ui;
+	font-size: 10pt;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	background-color: #d5d5d5;
+}
+
+.menu {
+	display: flex;
+	align-items: center;
+	background-color: #e3e3e3;
+	padding: 5px 0;
+}
+
+.menu .libelle {
+	margin: 10px;
+}
+
+.menu h1 {
+	margin: 0;
+	padding: 0 0 0 20px;
+}
+
+.menu #end-navbar {
+	display: flex;
+	justify-content: end;
+	align-items: center;
+	padding: 0 20px 0 0;
+}
+
+.menu #center-navbar {
+	flex: 1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.content {
+	display: flex;
+	padding: 20px;
+	justify-content: space-around;
+}
+
+.card {
+	width: 200px;
+	height: 100px;
+	text-align: center;
+	border: black 1px solid;
+	margin: 5px;
+}
+
+form > * {
+	background-color: #dbdbdb;
+	border-radius: 5px;
+	border: 1px solid #acacac;
+	cursor: pointer;
+	color: #525252;
+	font-size: 20px;
+	font-weight: bold;
+	padding: 2px 5px;
+}
+
+form > *:hover {
+	background-color: #e1e1e1;
+}
+
+.form-simulation > * {
+	margin: 0 5px;
+}
