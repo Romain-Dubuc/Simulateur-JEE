@@ -52,3 +52,22 @@ body {
 	border: black 1px solid;
 	margin: 5px;
 }
+
+form > * {
+	background-color: #dbdbdb;
+	border-radius: 5px;
+	border: 1px solid #acacac;
+	cursor: pointer;
+	color: #525252;
+	font-size: 20px;
+	font-weight: bold;
+	padding: 2px 5px;
+}
+
+form > *:hover {
+	background-color: #e1e1e1;
+}
+
+.form-simulation > * {
+	margin: 0 5px;
+}

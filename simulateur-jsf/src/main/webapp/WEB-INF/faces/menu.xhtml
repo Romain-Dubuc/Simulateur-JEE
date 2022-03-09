@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	xmlns:h="http://xmlns.jcp.org/jsf/html">
+	xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 	<h:body>
 	
 		<ui:composition>
 			<h1>#{text['face.menu.appname']}</h1>
 			<div id='center-navbar'>
-				<h:form>
-					<h:inputText onkeypress="if(event.which &lt; 48 || event.which &gt; 57) return false;"/>
+				<h:form class='form-simulation'>
+					<h:inputText 
+						onkeypress="if(event.which &lt; 48 || event.which &gt; 57) return false;"
+						a:placeholder="#{text['face.menu.refreshrate']}"
+					/>
 					<h:selectOneMenu id="speed">
 						<f:selectItem itemValue="0.5" itemLabel="x0.5" />
 						<f:selectItem itemValue="1.0" itemLabel="x1.0" />
@@ -16,7 +19,7 @@
 						<f:selectItem itemValue="8" itemLabel="x8" />
 						<f:selectItem itemValue="16" itemLabel="x16" />
 					</h:selectOneMenu>
-					<h:commandButton value="#{text['face.menu.simulation']}" action="#{catalogController.addNewItem()}" />
+					<h:commandButton class='button' value="#{text['face.menu.simulation']}" action="#{catalogController.addNewItem()}" />
 				</h:form>
 			</div>
 			<div id='end-navbar'>
