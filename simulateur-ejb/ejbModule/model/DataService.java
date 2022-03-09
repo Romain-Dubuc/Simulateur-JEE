@@ -22,6 +22,10 @@ public class DataService {
 	public List<MetricItem> getMetrics() {
 		return em.createQuery("select i from MetricItem i", MetricItem.class).getResultList();
 	}
+	
+	public List<Simulation> getSimulations() {
+		return em.createQuery("select i from Simulation i", Simulation.class).getResultList();
+	}
 
 	public void addMetric(MetricItem metric) {
 		em.persist(metric);

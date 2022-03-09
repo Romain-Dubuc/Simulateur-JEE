@@ -71,3 +71,8 @@ form > *:hover {
 .form-simulation > * {
 	margin: 0 5px;
 }
+
+#import-panel {
+	position: fixed;
+	bottom: 0;
+}

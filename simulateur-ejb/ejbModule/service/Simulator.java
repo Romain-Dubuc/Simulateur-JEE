@@ -49,4 +49,8 @@ public class Simulator implements SimulatorLocal {
 		metrics.get(0).setSimulation(sim);
 		dataService.addMetric(metrics.get(0));
 	}
+	
+	public List<Simulation> getSimulation() {
+		return dataService.getSimulations();
+	}
 }
