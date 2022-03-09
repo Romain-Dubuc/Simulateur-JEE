@@ -1,26 +1,34 @@
 package service;
 
-import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
-import model.entity.MetricItem;
+import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
+
+import form.JsonUploadForm; 
 
 @Path("/metric")
-@Consumes(MediaType.APPLICATION_JSON)
-@Produces(MediaType.APPLICATION_JSON)
 @RequestScoped
 public class MetricService {
 	@EJB
 	private SimulatorLocal simulator;
 	
-	@GET
-	public List<MetricItem>  getMetric() {
-		return simulator.getMetric();
-	} 
+	@POST
+	@Consumes("multipart/form-data")
+	public Response postJson(@MultipartForm JsonUploadForm form) {
+		
+		long timeSpent = 0;
+		
+		try {
+			timeSpent = simulator.handleJsonFile(form.getData());
+		} catch(Exception e) {
+			return Response.serverError().build();
+		}
+		
+		return Response.ok(timeSpent + " ms").build();
+	}
 }

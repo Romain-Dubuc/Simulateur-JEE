@@ -9,6 +9,7 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
 import model.entity.MetricItem;
+import model.entity.Simulation;
 
 @Named
 @ApplicationScoped
@@ -24,6 +25,10 @@ public class DataService {
 
 	public void addMetric(MetricItem metric) {
 		em.persist(metric);
+	}
+	
+	public void addSimulation(Simulation simulation) {
+		em.persist(simulation);
 	}
 
 }

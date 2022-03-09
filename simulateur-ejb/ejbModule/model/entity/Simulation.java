@@ -27,6 +27,10 @@ public class Simulation {
 		
 	}
 	
+	public Simulation(String name) {
+		this.name_simulation = name;
+	}
+	
 	public Integer getId() {
 		return id;
 	}
