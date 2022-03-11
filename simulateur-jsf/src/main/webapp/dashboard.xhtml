@@ -10,7 +10,6 @@
 	<h:body>
 	
 		<ui:composition template="/WEB-INF/faces/template.xhtml">
-	
 			<ui:define name="title">#{text['page.dashboard.title']}</ui:define>
 	
 			<ui:define name="content">
@@ -36,9 +35,14 @@
 				</ui:decorate>
 				
 				<div id='import-panel'>
-					<h:form>
-						<h:inputFile id="simulation-file" value="#{bean.file}" />
-					</h:form>
+					<h:form enctype="multipart/form-data"> 
+						<h:inputFile  
+							id="simulation-file" 
+							value="#{simulationController.import_file}"  
+						>
+							<f:ajax listener="#{simulationController.importSimulation()}" />
+						</h:inputFile>
+					</h:form> 
 				</div>
 			</ui:define>
 	

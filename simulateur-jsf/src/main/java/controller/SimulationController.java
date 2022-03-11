@@ -1,14 +1,22 @@
 package controller;
 
+import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
+import javax.servlet.http.Part;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.GenericType;
+import javax.ws.rs.core.MediaType;
+
+import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataOutput;
+
 import entity.SimulationEntity;
 
 @Named
@@ -18,13 +26,30 @@ public class SimulationController {
 	private String speed;
 	private String simulation_id;
 	private Map<String, String> simulations = new LinkedHashMap<String, String>();
+	private Part import_file;
 	
 	public void startSimulation() {
 	}
 	
-	public void init() {
+	public void importSimulation() {
+        try {
+        	Client client = ClientBuilder.newClient();
+            MultipartFormDataOutput mdo = new MultipartFormDataOutput();
+			mdo.addFormData("attachment", import_file.getInputStream(), MediaType.APPLICATION_OCTET_STREAM_TYPE);
+			GenericEntity<MultipartFormDataOutput> entity = new GenericEntity<MultipartFormDataOutput>(mdo) {};
+			WebTarget target = client.target("http://localhost:8080/simulateur-jax-rs/api/metric");
+			target.request().post(Entity.entity(entity, MediaType.MULTIPART_FORM_DATA_TYPE));
+			refreshSimulationSelect();
+			client.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void refreshSimulationSelect() {
+		simulations.clear();
 		Client client = ClientBuilder.newClient();
-	    WebTarget target = client.target("http://localhost:8080/simulateur-jax-rs/api/simulation");
+		WebTarget target = client.target("http://localhost:8080/simulateur-jax-rs/api/simulation");
 	    List<SimulationEntity> response = target.request().get(new GenericType<List<SimulationEntity>> () {});
 	    simulations.put(" ", " ");
 	    
@@ -33,6 +58,10 @@ public class SimulationController {
 		}
 	    
 	    client.close();
+	}
+	
+	public void init() {
+		refreshSimulationSelect();
 	}
 	
 	public String getRefreshRate() {
@@ -65,6 +94,14 @@ public class SimulationController {
 
 	public void setSimulations(Map<String, String> simulations) {
 		this.simulations = simulations;
+	}
+	
+	public Part getImport_file() {
+		return import_file;
+	}
+
+	public void setImport_file(Part import_file) {
+		this.import_file = import_file;
 	}
 	
 }
