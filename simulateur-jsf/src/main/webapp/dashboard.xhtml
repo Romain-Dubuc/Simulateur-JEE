@@ -36,6 +36,7 @@
 				
 				<div id='import-panel'>
 					<h:form enctype="multipart/form-data"> 
+						<h:outputLabel for="simulation-file" value="#{text['page.dashboard.import']}" />
 						<h:inputFile  
 							id="simulation-file" 
 							value="#{simulationController.import_file}"  

@@ -51,7 +51,6 @@ public class SimulationController {
 		Client client = ClientBuilder.newClient();
 		WebTarget target = client.target("http://localhost:8080/simulateur-jax-rs/api/simulation");
 	    List<SimulationEntity> response = target.request().get(new GenericType<List<SimulationEntity>> () {});
-	    simulations.put(" ", " ");
 	    
 		for (SimulationEntity a_simulation : response) {
 			simulations.put(a_simulation.getId(), a_simulation.getName_simulation());

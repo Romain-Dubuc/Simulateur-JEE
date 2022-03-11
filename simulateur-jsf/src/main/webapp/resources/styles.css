@@ -76,3 +76,7 @@ form > *:hover {
 	position: fixed;
 	bottom: 0;
 }
+
+#import-panel input {
+	display: none;
+}
