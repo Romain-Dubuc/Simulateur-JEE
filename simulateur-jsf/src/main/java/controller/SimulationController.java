@@ -7,8 +7,10 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.ResourceBundle;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.push.Push;
 import javax.faces.push.PushContext;
 import javax.inject.Inject;
@@ -102,10 +104,13 @@ public class SimulationController {
     		timer.start();
     	}
     }
-	
-	public void importSimulation() {
+    
+	public void importSimulation(Object text) {
+		
+		Map<String, String> messages = (Map<String, String>) text;
         try {
-        	setImport_message("Import en cours...");
+        	setImport_message((String) messages.get("page.messages.importInProgress"));
+        	push.send("updateImport");
         	Client client = ClientBuilder.newClient();
             MultipartFormDataOutput mdo = new MultipartFormDataOutput();
 			mdo.addFormData("attachment", import_file.getInputStream(), MediaType.APPLICATION_OCTET_STREAM_TYPE);
@@ -116,9 +121,9 @@ public class SimulationController {
 			client.close();
 			
 			if (response.getStatus() == Response.Status.OK.getStatusCode()) {
-				setImport_message("Import terminé en " + response.readEntity(String.class));
+				setImport_message(((String) messages.get("page.messages.importDoneWithTime")) + " " + response.readEntity(String.class));
 			} else {
-				setImport_message("Erreur dans l'import");
+				setImport_message((String) messages.get("page.messages.importError"));
 			}
 			
 			push.send("updateImport");

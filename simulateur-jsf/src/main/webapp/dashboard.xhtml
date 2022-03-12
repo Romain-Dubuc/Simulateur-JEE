@@ -103,7 +103,7 @@
 							value="#{simulationController.import_file}"
 							accept="application/json"
 						>
-							<f:ajax listener="#{simulationController.importSimulation()}" />
+							<f:ajax listener="#{simulationController.importSimulation(text)}" />
 						</h:inputFile>
 					</h:form> 
 				</div>
