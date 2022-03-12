@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.RequestScoped;
 import javax.faces.push.Push;
 import javax.faces.push.PushContext;
 import javax.inject.Inject;
@@ -65,6 +64,13 @@ public class SimulationController {
 		metrics_length = metrics.size();
 		client.close();
 		timer.setRepeats(true);
+		
+		if (refresh_rate.isEmpty()) {
+			timer.setDelay((int) (1000/Float.parseFloat(speed)));
+		} else {
+			timer.setDelay((int) ((Integer.parseInt(refresh_rate) * 1000)/Float.parseFloat(speed)));
+		}
+		
 		timer.start();
 	}
 	
