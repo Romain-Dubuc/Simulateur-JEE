@@ -22,24 +22,32 @@
 				<h:panelGroup id="data">
 					<div>
 						<div id="cal-data">
-							<ui:decorate template="/WEB-INF/faces/metric_card.xhtml">
+							<ui:decorate template="/WEB-INF/faces/calculation_card.xhtml">
 								<ui:define name="title-card">#{text['face.card.speed']}</ui:define>
-								<ui:define name="value-card">50</ui:define>
+								<ui:define name="min-card"><h:outputText value="#{simulationController.speed_calculation.minimum}"/></ui:define>
+								<ui:define name="max-card"><h:outputText value="#{simulationController.speed_calculation.maximum}"/></ui:define>
+								<ui:define name="average-card"><h:outputText value="#{simulationController.speed_calculation.average}"/></ui:define>
 								<ui:define name="unit-card">km/h</ui:define>
 							</ui:decorate>
-							<ui:decorate template="/WEB-INF/faces/metric_card.xhtml">
+							<ui:decorate template="/WEB-INF/faces/calculation_card.xhtml">
 								<ui:define name="title-card">#{text['face.card.altitude']}</ui:define>
-								<ui:define name="value-card">50</ui:define>
+								<ui:define name="min-card"><h:outputText value="#{simulationController.altitude_calculation.minimum}"/></ui:define>
+								<ui:define name="max-card"><h:outputText value="#{simulationController.altitude_calculation.maximum}"/></ui:define>
+								<ui:define name="average-card"><h:outputText value="#{simulationController.altitude_calculation.average}"/></ui:define>
 								<ui:define name="unit-card">km</ui:define>
 							</ui:decorate>
-							<ui:decorate template="/WEB-INF/faces/metric_card.xhtml">
+							<ui:decorate template="/WEB-INF/faces/calculation_card.xhtml">
 								<ui:define name="title-card">#{text['face.card.acceleration']}</ui:define>
-								<ui:define name="value-card">50</ui:define>
+								<ui:define name="min-card"><h:outputText value="#{simulationController.acceleration_calculation.minimum}"/></ui:define>
+								<ui:define name="max-card"><h:outputText value="#{simulationController.acceleration_calculation.maximum}"/></ui:define>
+								<ui:define name="average-card"><h:outputText value="#{simulationController.acceleration_calculation.average}"/></ui:define>
 								<ui:define name="unit-card">m/s²</ui:define>
 							</ui:decorate>
-							<ui:decorate template="/WEB-INF/faces/metric_card.xhtml">
+							<ui:decorate template="/WEB-INF/faces/calculation_card.xhtml">
 								<ui:define name="title-card">#{text['face.card.thrust']}</ui:define>
-								<ui:define name="value-card">50</ui:define>
+								<ui:define name="min-card"><h:outputText value="#{simulationController.thrust_calculation.minimum}"/></ui:define>
+								<ui:define name="max-card"><h:outputText value="#{simulationController.thrust_calculation.maximum}"/></ui:define>
+								<ui:define name="average-card"><h:outputText value="#{simulationController.thrust_calculation.average}"/></ui:define>
 								<ui:define name="unit-card">N</ui:define>
 							</ui:decorate>
 						</div>

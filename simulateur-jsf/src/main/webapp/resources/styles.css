@@ -45,7 +45,7 @@ body {
 
 .card {
 	width: 200px;
-	height: 100px;
+	padding: 0 0 10px 0;
 	text-align: center;
 	border: black 1px solid;
 	margin: 5px;

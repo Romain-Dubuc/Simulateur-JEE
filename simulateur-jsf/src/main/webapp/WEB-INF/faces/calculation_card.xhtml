@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	<div class='card'>
+		<div class='header'>
+			<h2><ui:insert name='title-card'></ui:insert></h2>
+		</div>
+		<div class='body'>
+			<div>
+				<span>#{text['face.card.min']}: <ui:insert name='min-card'></ui:insert><ui:insert name='unit-card'></ui:insert></span>
+			</div>
+			<div>
+				<span>#{text['face.card.max']}: <ui:insert name='max-card'></ui:insert><ui:insert name='unit-card'></ui:insert></span>
+			</div>
+			<div>
+				<span>#{text['face.card.average']}: <ui:insert name='average-card'></ui:insert><ui:insert name='unit-card'></ui:insert></span>
+			</div>
+		</div>
+	</div>
+</html>

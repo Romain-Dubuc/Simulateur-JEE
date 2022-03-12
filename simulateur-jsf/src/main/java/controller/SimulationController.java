@@ -40,6 +40,11 @@ public class SimulationController {
 	private Integer metrics_length;
 	private MetricEntity current_metric;
 	
+	private MetricCalculation speed_calculation;
+	private MetricCalculation altitude_calculation;
+	private MetricCalculation acceleration_calculation;
+	private MetricCalculation thrust_calculation;
+	
 	@Inject
 	@Push
     private PushContext push;
@@ -48,6 +53,10 @@ public class SimulationController {
         public void actionPerformed(ActionEvent evt) {
         	if (metrics_length != 0) {
         		setCurrent_metric(metrics.remove(0));
+        		speed_calculation.calculation(current_metric.getVelocity());
+        		altitude_calculation.calculation(current_metric.getAltitude());
+        		acceleration_calculation.calculation(current_metric.getAcceleration());
+        		thrust_calculation.calculation(current_metric.getThrust());
     			metrics_length--;
     		} else {
     			timer.stop();
@@ -63,6 +72,14 @@ public class SimulationController {
 		metrics = target.request().get(new GenericType<List<MetricEntity>> () {});
 		metrics_length = metrics.size();
 		client.close();
+		
+		if (metrics_length != 0) {
+			speed_calculation = new MetricCalculation(metrics.get(0).getVelocity());
+			altitude_calculation = new MetricCalculation(metrics.get(0).getAltitude());
+			acceleration_calculation = new MetricCalculation(metrics.get(0).getAcceleration());
+			thrust_calculation = new MetricCalculation(metrics.get(0).getThrust());
+		}
+		
 		timer.setRepeats(true);
 		
 		if (refresh_rate.isEmpty()) {
@@ -160,6 +177,38 @@ public class SimulationController {
 
 	public void setCurrent_metric(MetricEntity current_metric) {
 		this.current_metric = current_metric;
+	}
+
+	public MetricCalculation getSpeed_calculation() {
+		return speed_calculation;
+	}
+
+	public void setSpeed_calculation(MetricCalculation speed_calculation) {
+		this.speed_calculation = speed_calculation;
+	}
+
+	public MetricCalculation getAltitude_calculation() {
+		return altitude_calculation;
+	}
+
+	public void setAltitude_calculation(MetricCalculation altitude_calculation) {
+		this.altitude_calculation = altitude_calculation;
+	}
+
+	public MetricCalculation getAcceleration_calculation() {
+		return acceleration_calculation;
+	}
+
+	public void setAcceleration_calculation(MetricCalculation acceleration_calculation) {
+		this.acceleration_calculation = acceleration_calculation;
+	}
+
+	public MetricCalculation getThrust_calculation() {
+		return thrust_calculation;
+	}
+
+	public void setThrust_calculation(MetricCalculation thrust_calculation) {
+		this.thrust_calculation = thrust_calculation;
 	}
 	
 }
