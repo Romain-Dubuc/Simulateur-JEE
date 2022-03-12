@@ -1,12 +1,21 @@
 package controller;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.push.Push;
+import javax.faces.push.PushContext;
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.Part;
+import javax.swing.Timer;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
@@ -17,18 +26,46 @@ import javax.ws.rs.core.MediaType;
 
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataOutput;
 
+import entity.MetricEntity;
 import entity.SimulationEntity;
 
 @Named
-@RequestScoped
+@ApplicationScoped
 public class SimulationController {
 	private String refresh_rate;
 	private String speed;
 	private String simulation_id;
 	private Map<String, String> simulations = new LinkedHashMap<String, String>();
 	private Part import_file;
+	private List<MetricEntity> metrics = new ArrayList<MetricEntity>();
+	private Integer metrics_length;
+	private MetricEntity current_metric;
 	
-	public void startSimulation() {
+	@Inject
+	@Push
+    private PushContext push;
+	
+	ActionListener simulation = new ActionListener() {
+        public void actionPerformed(ActionEvent evt) {
+        	if (metrics_length != 0) {
+        		setCurrent_metric(metrics.remove(0));
+    			metrics_length--;
+    		} else {
+    			timer.stop();
+    		}             
+        	push.send("updateMetric");
+        }
+    };
+    private final Timer timer = new Timer(1000, simulation);
+    
+    public void startSimulation() {
+		Client client = ClientBuilder.newClient();
+		WebTarget target = client.target("http://localhost:8080/simulateur-jax-rs/api/simulation/" + simulation_id);
+		metrics = target.request().get(new GenericType<List<MetricEntity>> () {});
+		metrics_length = metrics.size();
+		client.close();
+		timer.setRepeats(true);
+		timer.start();
 	}
 	
 	public void importSimulation() {
@@ -101,6 +138,22 @@ public class SimulationController {
 
 	public void setImport_file(Part import_file) {
 		this.import_file = import_file;
+	}
+
+	public List<MetricEntity> getMetrics() {
+		return metrics;
+	}
+
+	public void setMetrics(List<MetricEntity> metrics) {
+		this.metrics = metrics;
+	}
+
+	public MetricEntity getCurrent_metric() {
+		return current_metric;
+	}
+
+	public void setCurrent_metric(MetricEntity current_metric) {
+		this.current_metric = current_metric;
 	}
 	
 }

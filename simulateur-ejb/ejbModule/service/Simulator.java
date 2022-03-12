@@ -50,7 +50,11 @@ public class Simulator implements SimulatorLocal {
 		dataService.addMetric(metrics.get(0));
 	}
 	
-	public List<Simulation> getSimulation() {
+	public List<Simulation> getSimulations() {
 		return dataService.getSimulations();
+	}
+	
+	public List<MetricItem> getSimulation(Integer id) {
+		return dataService.getSimulation(id);
 	}
 }

@@ -13,6 +13,11 @@
 			<ui:define name="title">#{text['page.dashboard.title']}</ui:define>
 	
 			<ui:define name="content">
+				<h:form>
+				    <f:websocket channel="push" connected="true">
+				        <f:ajax event="updateMetric" render=":data" />
+				    </f:websocket>
+				</h:form>
 				<ui:decorate template="/WEB-INF/faces/metric_card.xhtml">
 					<ui:define name="title-card">#{text['face.card.speed']}</ui:define>
 					<ui:define name="value-card">50</ui:define>
@@ -39,7 +44,7 @@
 						<h:outputLabel for="simulation-file" value="#{text['page.dashboard.import']}" />
 						<h:inputFile  
 							id="simulation-file" 
-							value="#{simulationController.import_file}"  
+							value="#{simulationController.import_file}"
 						>
 							<f:ajax listener="#{simulationController.importSimulation()}" />
 						</h:inputFile>

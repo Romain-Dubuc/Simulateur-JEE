@@ -12,5 +12,6 @@ public interface SimulatorLocal {
 	public List<MetricItem> getMetric();
 	public void serializeJson(Simulation sim, String data);
 	public long handleJsonFile(byte[] file);
-	public List<Simulation> getSimulation();
+	public List<Simulation> getSimulations();
+	public List<MetricItem> getSimulation(Integer id);
 }
