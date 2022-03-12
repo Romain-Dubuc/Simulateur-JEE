@@ -78,17 +78,18 @@ public class SimulationController {
 			altitude_calculation = new MetricCalculation(metrics.get(0).getAltitude());
 			acceleration_calculation = new MetricCalculation(metrics.get(0).getAcceleration());
 			thrust_calculation = new MetricCalculation(metrics.get(0).getThrust());
+		
+			timer.setRepeats(true);
+			
+			if (refresh_rate.isEmpty()) {
+				timer.setDelay((int) (1000/Float.parseFloat(speed)));
+			} else {
+				timer.setDelay((int) ((Integer.parseInt(refresh_rate) * 1000)/Float.parseFloat(speed)));
+			}
+			
+			timer.start();
+			
 		}
-		
-		timer.setRepeats(true);
-		
-		if (refresh_rate.isEmpty()) {
-			timer.setDelay((int) (1000/Float.parseFloat(speed)));
-		} else {
-			timer.setDelay((int) ((Integer.parseInt(refresh_rate) * 1000)/Float.parseFloat(speed)));
-		}
-		
-		timer.start();
 	}
 	
 	public void importSimulation() {
