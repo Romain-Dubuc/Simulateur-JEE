@@ -62,7 +62,7 @@ form > * {
 	padding: 2px 5px;
 }
 
-form > *:hover {
+#center-navbar > *:hover {
 	background-color: #e1e1e1;
 }
 
@@ -75,6 +75,12 @@ form > *:hover {
 	bottom: 0;
 	left: 50%;
     transform: translateX(-50%);
+    text-align: center;
+    font-weight: bold;
+}
+
+#import-panel p {
+	margin: 0;
 }
 
 #import-panel input {

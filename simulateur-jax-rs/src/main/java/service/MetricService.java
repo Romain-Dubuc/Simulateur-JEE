@@ -1,10 +1,12 @@
 package service;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
 import javax.ejb.EJB;
+import javax.ejb.EJBException;
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -32,8 +34,8 @@ public class MetricService {
 			try {
                 InputStream inputStream = inputPart.getBody(InputStream.class, null);
 				timeSpent = simulator.handleJsonFile(inputStream.readAllBytes());
-			} catch(Exception e) {
-				return Response.serverError().build();
+			} catch(EJBException | IOException e) {
+				return Response.status(400).build();
 			}
 		}
 		

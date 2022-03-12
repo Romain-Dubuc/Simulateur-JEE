@@ -16,6 +16,7 @@
 				<h:form>
 				    <f:websocket channel="push" connected="true">
 				        <f:ajax event="updateMetric" render=":data" />
+				        <f:ajax event="updateImport" render=":import_state :import_select" />
 				    </f:websocket>
 				</h:form>
 				
@@ -92,11 +93,15 @@
 				</h:panelGroup>
 				
 				<div id='import-panel'>
+					<h:panelGroup id="import_state">
+					<p><h:outputText value="#{simulationController.import_message}"/></p>
+					</h:panelGroup>
 					<h:form enctype="multipart/form-data"> 
 						<h:outputLabel for="simulation-file" value="#{text['page.dashboard.import']}" />
 						<h:inputFile  
 							id="simulation-file" 
 							value="#{simulationController.import_file}"
+							accept="application/json"
 						>
 							<f:ajax listener="#{simulationController.importSimulation()}" />
 						</h:inputFile>

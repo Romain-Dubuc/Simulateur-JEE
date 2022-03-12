@@ -22,6 +22,7 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataOutput;
 
@@ -40,6 +41,7 @@ public class SimulationController {
 	private Integer metrics_length;
 	private MetricEntity current_metric;
 	private boolean simulation_started = false;
+	private String import_message = "";
 	
 	private MetricCalculation speed_calculation;
 	private MetricCalculation altitude_calculation;
@@ -103,14 +105,23 @@ public class SimulationController {
 	
 	public void importSimulation() {
         try {
+        	setImport_message("Import en cours...");
         	Client client = ClientBuilder.newClient();
             MultipartFormDataOutput mdo = new MultipartFormDataOutput();
 			mdo.addFormData("attachment", import_file.getInputStream(), MediaType.APPLICATION_OCTET_STREAM_TYPE);
 			GenericEntity<MultipartFormDataOutput> entity = new GenericEntity<MultipartFormDataOutput>(mdo) {};
 			WebTarget target = client.target("http://localhost:8080/simulateur-jax-rs/api/metric");
-			target.request().post(Entity.entity(entity, MediaType.MULTIPART_FORM_DATA_TYPE));
+			Response response = target.request().post(Entity.entity(entity, MediaType.MULTIPART_FORM_DATA_TYPE));
 			refreshSimulationSelect();
 			client.close();
+			
+			if (response.getStatus() == Response.Status.OK.getStatusCode()) {
+				setImport_message("Import terminé en " + response.readEntity(String.class));
+			} else {
+				setImport_message("Erreur dans l'import");
+			}
+			
+			push.send("updateImport");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -227,6 +238,14 @@ public class SimulationController {
 
 	public void setSimulation_started(boolean simulation_started) {
 		this.simulation_started = simulation_started;
+	}
+
+	public String getImport_message() {
+		return import_message;
+	}
+
+	public void setImport_message(String import_message) {
+		this.import_message = import_message;
 	}
 	
 }
