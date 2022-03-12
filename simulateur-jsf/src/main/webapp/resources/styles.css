@@ -73,6 +73,8 @@ form > *:hover {
 #import-panel {
 	position: fixed;
 	bottom: 0;
+	left: 50%;
+    transform: translateX(-50%);
 }
 
 #import-panel input {
