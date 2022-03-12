@@ -40,9 +40,7 @@ body {
 }
 
 .content {
-	display: flex;
 	padding: 20px;
-	justify-content: space-around;
 }
 
 .card {
@@ -79,4 +77,18 @@ form > *:hover {
 
 #import-panel input {
 	display: none;
+}
+
+#data > div {
+	display: flex;
+	flex-direction: column;
+}
+
+#data div #main-data {
+	display: flex;
+}
+
+#data div #cal-data {
+	display: flex;
+	justify-content: space-around;
 }

@@ -18,26 +18,70 @@
 				        <f:ajax event="updateMetric" render=":data" />
 				    </f:websocket>
 				</h:form>
-				<ui:decorate template="/WEB-INF/faces/metric_card.xhtml">
-					<ui:define name="title-card">#{text['face.card.speed']}</ui:define>
-					<ui:define name="value-card">50</ui:define>
-					<ui:define name="unit-card">km/h</ui:define>
-				</ui:decorate>
-				<ui:decorate template="/WEB-INF/faces/metric_card.xhtml">
-					<ui:define name="title-card">#{text['face.card.altitude']}</ui:define>
-					<ui:define name="value-card">50</ui:define>
-					<ui:define name="unit-card">km</ui:define>
-				</ui:decorate>
-				<ui:decorate template="/WEB-INF/faces/metric_card.xhtml">
-					<ui:define name="title-card">#{text['face.card.acceleration']}</ui:define>
-					<ui:define name="value-card">50</ui:define>
-					<ui:define name="unit-card">m/s²</ui:define>
-				</ui:decorate>
-				<ui:decorate template="/WEB-INF/faces/metric_card.xhtml">
-					<ui:define name="title-card">#{text['face.card.thrust']}</ui:define>
-					<ui:define name="value-card">50</ui:define>
-					<ui:define name="unit-card">N</ui:define>
-				</ui:decorate>
+				
+				<h:panelGroup id="data">
+					<div>
+						<div id="cal-data">
+							<ui:decorate template="/WEB-INF/faces/metric_card.xhtml">
+								<ui:define name="title-card">#{text['face.card.speed']}</ui:define>
+								<ui:define name="value-card">50</ui:define>
+								<ui:define name="unit-card">km/h</ui:define>
+							</ui:decorate>
+							<ui:decorate template="/WEB-INF/faces/metric_card.xhtml">
+								<ui:define name="title-card">#{text['face.card.altitude']}</ui:define>
+								<ui:define name="value-card">50</ui:define>
+								<ui:define name="unit-card">km</ui:define>
+							</ui:decorate>
+							<ui:decorate template="/WEB-INF/faces/metric_card.xhtml">
+								<ui:define name="title-card">#{text['face.card.acceleration']}</ui:define>
+								<ui:define name="value-card">50</ui:define>
+								<ui:define name="unit-card">m/s²</ui:define>
+							</ui:decorate>
+							<ui:decorate template="/WEB-INF/faces/metric_card.xhtml">
+								<ui:define name="title-card">#{text['face.card.thrust']}</ui:define>
+								<ui:define name="value-card">50</ui:define>
+								<ui:define name="unit-card">N</ui:define>
+							</ui:decorate>
+						</div>
+						<div id="main-data">
+							<ui:decorate template="/WEB-INF/faces/metric_card.xhtml">
+								<ui:define name="title-card">#{text['face.card.time']}</ui:define>
+								<ui:define name="value-card"><h:outputText value="#{simulationController.current_metric.time}"/></ui:define>
+								<ui:define name="unit-card">secondes</ui:define>
+							</ui:decorate>
+							<ui:decorate template="/WEB-INF/faces/metric_card.xhtml">
+								<ui:define name="title-card">#{text['face.card.speed']}</ui:define>
+								<ui:define name="value-card"><h:outputText value="#{simulationController.current_metric.velocity}"/></ui:define>
+								<ui:define name="unit-card">km/h</ui:define>
+							</ui:decorate>
+							<ui:decorate template="/WEB-INF/faces/metric_card.xhtml">
+								<ui:define name="title-card">#{text['face.card.altitude']}</ui:define>
+								<ui:define name="value-card"><h:outputText value="#{simulationController.current_metric.altitude}"/></ui:define>
+								<ui:define name="unit-card">km</ui:define>
+							</ui:decorate>
+							<ui:decorate template="/WEB-INF/faces/metric_card.xhtml">
+								<ui:define name="title-card">#{text['face.card.acceleration']}</ui:define>
+								<ui:define name="value-card"><h:outputText value="#{simulationController.current_metric.acceleration}"/></ui:define>
+								<ui:define name="unit-card">m/s²</ui:define>
+							</ui:decorate>
+							<ui:decorate template="/WEB-INF/faces/metric_card.xhtml">
+								<ui:define name="title-card">#{text['face.card.thrust']}</ui:define>
+								<ui:define name="value-card"><h:outputText value="#{simulationController.current_metric.thrust}"/></ui:define>
+								<ui:define name="unit-card">N</ui:define>
+							</ui:decorate>
+							<ui:decorate template="/WEB-INF/faces/metric_card.xhtml">
+								<ui:define name="title-card">#{text['face.card.throttle']}</ui:define>
+								<ui:define name="value-card"><h:outputText value="#{simulationController.current_metric.throttle}"/></ui:define>
+								<ui:define name="unit-card">N</ui:define>
+							</ui:decorate>
+							<ui:decorate template="/WEB-INF/faces/metric_card.xhtml">
+								<ui:define name="title-card">#{text['face.card.gravity']}</ui:define>
+								<ui:define name="value-card"><h:outputText value="#{simulationController.current_metric.gravity}"/></ui:define>
+								<ui:define name="unit-card">N</ui:define>
+							</ui:decorate>
+						</div>
+					</div>
+				</h:panelGroup>
 				
 				<div id='import-panel'>
 					<h:form enctype="multipart/form-data"> 
