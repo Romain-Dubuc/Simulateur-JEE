@@ -39,6 +39,7 @@ public class SimulationController {
 	private List<MetricEntity> metrics = new ArrayList<MetricEntity>();
 	private Integer metrics_length;
 	private MetricEntity current_metric;
+	private boolean simulation_started = false;
 	
 	private MetricCalculation speed_calculation;
 	private MetricCalculation altitude_calculation;
@@ -91,6 +92,14 @@ public class SimulationController {
 			
 		}
 	}
+    
+    public void toggleSimulation() {
+    	if (timer.isRunning()) {
+    		timer.stop();
+    	} else {
+    		timer.start();
+    	}
+    }
 	
 	public void importSimulation() {
         try {
@@ -210,6 +219,14 @@ public class SimulationController {
 
 	public void setThrust_calculation(MetricCalculation thrust_calculation) {
 		this.thrust_calculation = thrust_calculation;
+	}
+
+	public boolean isSimulation_started() {
+		return simulation_started;
+	}
+
+	public void setSimulation_started(boolean simulation_started) {
+		this.simulation_started = simulation_started;
 	}
 	
 }

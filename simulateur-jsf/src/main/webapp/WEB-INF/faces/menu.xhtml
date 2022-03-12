@@ -28,6 +28,7 @@
 						<f:selectItem itemValue="16" itemLabel="x16" />
 					</h:selectOneMenu>
 					<h:commandButton class='button' value="#{text['face.menu.simulation']}" action="#{simulationController.startSimulation()}" />
+					<h:commandButton class='button' value="#{text['face.menu.stop']}" action="#{simulationController.toggleSimulation()}" />
 				</h:form>
 			</div>
 			<div id='end-navbar'>
